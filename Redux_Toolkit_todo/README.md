@@ -62,12 +62,12 @@ _Slice is encapsulation of state, actions and reducers_
 - `useDispatch()` allows you to dispatch actions to the store.
 
 ## Final :
-![final](assets/app_final.png)
+![app_final.png]
 
 official documentation for React-Redux and Redux Toolkit for deeper learning:
 
-[React-Redux](https://react-redux.js.org/)
-[Redux Toolkit](https://redux-toolkit.js.org/)
+- [React-Redux](https://react-redux.js.org/) 
+- [Redux Toolkit](https://redux-toolkit.js.org/)
 
 #### React + Vite
 
