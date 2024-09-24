@@ -127,3 +127,106 @@ includes these APIs
 - createSlice()
 - createAsyncThunk
 - createEntityAdapter
+
+###
+
+Using `Redux (via Provider and store)` is an alternative to manually passing props down through every component, often called `prop drilling"` It allows global state management, meaning components can access and update the state without the need for passing props down multiple layers.
+
+### Example without Redux / Prop Drilling
+```jsx
+
+// App.jsx
+import React, { useState } from 'react';
+import Navbar from './Navbar';
+import Profile from './Profile';
+
+function App() {
+  const [user, setUser] = useState({ name: 'John Doe', loggedIn: true });
+
+  return (
+    <div>
+      {/* Passing user as prop to each component */}
+      <Navbar user={user} />
+      <Profile user={user} />
+    </div>
+  );
+}
+
+export default App;
+
+// Navbar.jsx
+function Navbar({ user }) {
+  return <div>Welcome, {user.name}</div>;
+}
+
+// Profile.jsx
+function Profile({ user }) {
+  return <div>Profile: {user.name}</div>;
+}
+
+```
+the state is passed from parent to child components through props.
+The `user` state is passed through each component as a prop, even if some components don’t need it.
+
+### Using Redux
+
+```jsx
+// store.js (Redux Store Setup)
+import { configureStore, createSlice } from '@reduxjs/toolkit';
+
+const initialState = { user: { name: 'John Doe', loggedIn: true } };
+
+const userSlice = createSlice({
+  name: 'user',
+  initialState,
+  reducers: {}
+});
+
+const store = configureStore({
+  reducer: {
+    user: userSlice.reducer
+  }
+});
+
+export default store;
+
+// App.jsx
+import React from 'react';
+import Navbar from './Navbar';
+import Profile from './Profile';
+import { Provider } from 'react-redux';
+import store from './store';
+
+function App() {
+  return (
+    <Provider store={store}>
+      {/* No need to pass props manually */}
+      <Navbar />
+      <Profile />
+    </Provider>
+  );
+}
+
+export default App;
+
+// Navbar.jsx
+import { useSelector } from 'react-redux';
+
+function Navbar() {
+  const user = useSelector(state => state.user.user); // Accessing state from Redux store
+  return <div>Welcome, {user.name}</div>;
+}
+
+export default Navbar;
+
+// Profile.jsx
+import { useSelector } from 'react-redux';
+
+function Profile() {
+  const user = useSelector(state => state.user.user); // Accessing state from Redux store
+  return <div>Profile: {user.name}</div>;
+}
+
+export default Profile;
+
+```
