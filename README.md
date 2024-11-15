@@ -1,6 +1,13 @@
-# React_and_redux
+# React_and_redux : React-Redux (library) and Redux Toolkit(RTK)
 
+## React-Redux 
 Redux is a popular **state management library** for JavaScript applications, particularly with React. It helps manage the state of your application making it easier to handle complex state interactions. 
+
+### Setup react-redux 
+
+```
+npm install react-redux
+```
 
 ## Core Concepts of Redux
 
@@ -118,6 +125,14 @@ const todoReducer = (state = initialState, action) => {
 
 
 ## Redux Toolkit
+Redux Toolkit being the modern, official way to work with Redux, which simplifies much of the traditional setup.
+It is a wrapper for Redux that simplifies setup and reduces boilerplate. It’s the recommended way to use Redux in modern apps.
+
+### Setup RTK:
+
+```bash
+npm i @reduxjs/toolkit
+```
 
 includes these APIs
 
